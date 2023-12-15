@@ -1,8 +1,11 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 
-async function bootstrap() {
+(async function () {
   const app = await NestFactory.create(AppModule);
   await app.listen(3000);
-}
-bootstrap();
+
+  console.log(
+    `\n🚀 Application is successfully running on: ${await app.getUrl()}`,
+  );
+})();
