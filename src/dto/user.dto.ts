@@ -1,7 +1,7 @@
-export interface UserDTO {
-  id: string;
+export class UserDTO {
+  id: number;
   name: string;
   age: number;
-  email: string;
-  password: string;
 }
+
+export type User = InstanceType<typeof UserDTO>;

@@ -8,42 +8,37 @@ import {
   Put,
 } from "@nestjs/common";
 import { UserDTO } from "./dto/user.dto";
-
-const USERS = [] as UserDTO[];
+import { UsersService } from "./users.service";
 
 @Controller("/users")
 export class UsersController {
-  constructor() {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   getUsers() {
-    return USERS;
+    return this.usersService.getUsers() || [];
   }
 
   @Post()
   addUser(@Body() user: UserDTO) {
-    USERS.push(user);
-    return "User registered successfully!";
+    this.usersService.addUser(user);
+    return { message: "User registered successfully!" };
   }
 
   @Get("/:id")
-  getUser(@Param("id") id: string) {
-    return USERS.find((user) => user.id === id);
+  getUser(@Param("id") id: string): UserDTO | { message: string } {
+    return this.usersService.getUser(+id) || { message: "User not found!" };
   }
 
   @Put("/:id")
   updateUser(@Param("id") id: string, @Body() user: UserDTO) {
-    const userIndex = USERS.findIndex((user) => user.id === id);
-    if (!userIndex) return "User not found!";
-    else USERS[userIndex] = user;
-    return "User updated successfully!";
+    this.usersService.updateUser(+id, user);
+    return { message: "User updated successfully!" };
   }
 
   @Delete("/:id")
   deleteUser(@Param("id") id: string) {
-    const userIndex = USERS.findIndex((user) => user.id === id);
-    if (!userIndex) return "User not found!";
-    else USERS.splice(userIndex, 1);
-    return "User deleted successfully!";
+    this.usersService.deleteUser(+id);
+    return { message: "User deleted successfully!" };
   }
 }

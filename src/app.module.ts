@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import * as Joi from "joi";
 import { UsersController } from "./users.controller";
+import { UsersService } from "./users.service";
 
 @Module({
   imports: [
@@ -19,6 +20,6 @@ import { UsersController } from "./users.controller";
     }),
   ],
   controllers: [UsersController],
-  providers: [],
+  providers: [UsersService],
 })
 export class AppModule {}
