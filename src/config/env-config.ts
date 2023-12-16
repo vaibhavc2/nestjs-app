@@ -1,6 +1,6 @@
-export const envConfig = {
+export const envConfig: EnvConfig = {
   dev: {
     nodeEnv: process.env.NODE_ENV,
-    port: process.env.PORT,
+    port: Number(process.env.PORT),
   },
 };

@@ -12,6 +12,10 @@ import { UsersController } from "./users.controller";
           .default("development"),
         PORT: Joi.number().default(3000),
       }),
+      validationOptions: {
+        allowUnknown: true,
+        abortEarly: true,
+      },
     }),
   ],
   controllers: [UsersController],
