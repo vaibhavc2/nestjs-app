@@ -14,8 +14,8 @@ export class UsersService {
   }
 
   getUsers() {
-    // return [...this.store.values()];
-    return Array.from(this.store.values()).map((user) => user);
+    return [...this.store.values()];
+    // return Array.from(this.store.values()).map((user) => user);
   }
 
   updateUser(id: number, user: User) {
